@@ -1,8 +1,10 @@
 "use server";
 // 예약 요청 접수·조회. 누구나 직접 호출할 수 있으므로 화면에서 검사했더라도 여기서 전부 다시 검사한다.
 import { redirect } from "next/navigation";
+import { after } from "next/server";
 import { z } from "zod";
 import { bookingCodeSchema, bookingRequestSchema, evaluateRequest, type RequestError, type RequestField } from "@/lib/booking-rules";
+import { sendBookingEmail } from "@/lib/mail/send-booking-email";
 import { createBookingRequest, findBooking, getBookedRanges, getMyPendingRanges, getRoom, type BookingSummary } from "@/lib/repo";
 
 export type RequestState = { error?: RequestError | "server"; invalidFields?: RequestField[] } | null;
@@ -25,7 +27,13 @@ export async function submitBookingRequest(_prev: RequestState, formData: FormDa
     const result = evaluateRequest({ input, room, booked, myPending });
     if ("error" in result) return { error: result.error };
     // 금액은 화면에서 보낸 값이 아니라 서버가 방금 계산한 값으로 저장
-    code = await createBookingRequest(input, result.price, room!);
+    const saved = await createBookingRequest(input, result.price, room!);
+    code = saved.code;
+    // 메일은 화면 응답을 보낸 뒤에 보낸다. 실패해도 요청은 이미 저장됨 (기록 후 관리자가 다시 보내기)
+    after(async () => {
+      await sendBookingEmail(saved.id, "received");
+      await sendBookingEmail(saved.id, "admin_new_request");
+    });
   } catch {
     return { error: "server" };
   }

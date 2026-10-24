@@ -7,6 +7,10 @@ const withNextIntl = createNextIntlPlugin();
 const nextConfig: NextConfig = {
   // 새 캐시 기능은 끄고, 관리하기 쉬운 기존 방식 사용 (PLAN.md 참고)
   cacheComponents: false,
+  experimental: {
+    // 관리자 사진 올리기용. 사진은 브라우저에서 줄여 보내고 서버가 2.5MB 넘으면 거절 (여유분 포함 3MB)
+    serverActions: { bodySizeLimit: "3mb" },
+  },
   turbopack: {
     rules: {
       "*.css": {

@@ -19,3 +19,15 @@ export function formatKRWShort(amount: number): string {
   if (amount >= 1_000_000) return `₩${Number((amount / 1_000_000).toFixed(2))}M`;
   return `₩${Math.round(amount / 1000)}k`;
 }
+
+/** 시각 표시 (서울 기준): "Oct 24, 2026, 7:30 PM" */
+export function formatDateTime(iso: string): string {
+  return new Date(iso).toLocaleString("en-US", {
+    timeZone: "Asia/Seoul",
+    month: "short",
+    day: "numeric",
+    year: "numeric",
+    hour: "numeric",
+    minute: "2-digit",
+  });
+}

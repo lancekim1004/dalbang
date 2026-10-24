@@ -41,14 +41,14 @@ isOneToOne: false
                   ]
                 },"bookings": {
                   Row: {
-                    "admin_note": string | null,"check_in": string,"check_out": string,"code": string,"created_at": string,"decided_at": string | null,"decided_by": string | null,"guest_email": string,"guest_name": string,"guest_phone": string | null,"guests_count": number,"id": string,"locale": string,"message": string | null,"nationality": string | null,"price_snapshot": NonNullable<Json>,"privacy_consent_at": string | null,"reject_reason": string | null,"room_id": string,"status": Database["public"]['Enums']["booking_status"],"total_amount": number,"updated_at": string
+                    "admin_note": string | null,"check_in": string,"check_out": string,"code": string,"created_at": string,"decided_at": string | null,"decided_by": string | null,"guest_email": string,"guest_name": string,"guest_phone": string | null,"guests_count": number,"id": string,"locale": string,"message": string | null,"nationality": string | null,"personal_data_deleted_at": string | null,"price_snapshot": NonNullable<Json>,"privacy_consent_at": string | null,"reject_reason": string | null,"room_id": string,"status": Database["public"]['Enums']["booking_status"],"total_amount": number,"updated_at": string
                   }
                   ComputedFields: never
                   Insert: {
-                    "admin_note"?: string | null,"check_in": string,"check_out": string,"code": string,"created_at"?: string,"decided_at"?: string | null,"decided_by"?: string | null,"guest_email": string,"guest_name": string,"guest_phone"?: string | null,"guests_count"?: number,"id"?: string,"locale"?: string,"message"?: string | null,"nationality"?: string | null,"price_snapshot": NonNullable<Json>,"privacy_consent_at"?: string | null,"reject_reason"?: string | null,"room_id": string,"status"?: Database["public"]['Enums']["booking_status"],"total_amount": number,"updated_at"?: string
+                    "admin_note"?: string | null,"check_in": string,"check_out": string,"code": string,"created_at"?: string,"decided_at"?: string | null,"decided_by"?: string | null,"guest_email": string,"guest_name": string,"guest_phone"?: string | null,"guests_count"?: number,"id"?: string,"locale"?: string,"message"?: string | null,"nationality"?: string | null,"personal_data_deleted_at"?: string | null,"price_snapshot": NonNullable<Json>,"privacy_consent_at"?: string | null,"reject_reason"?: string | null,"room_id": string,"status"?: Database["public"]['Enums']["booking_status"],"total_amount": number,"updated_at"?: string
                   }
                   Update: {
-                    "admin_note"?: string | null,"check_in"?: string,"check_out"?: string,"code"?: string,"created_at"?: string,"decided_at"?: string | null,"decided_by"?: string | null,"guest_email"?: string,"guest_name"?: string,"guest_phone"?: string | null,"guests_count"?: number,"id"?: string,"locale"?: string,"message"?: string | null,"nationality"?: string | null,"price_snapshot"?: NonNullable<Json>,"privacy_consent_at"?: string | null,"reject_reason"?: string | null,"room_id"?: string,"status"?: Database["public"]['Enums']["booking_status"],"total_amount"?: number,"updated_at"?: string
+                    "admin_note"?: string | null,"check_in"?: string,"check_out"?: string,"code"?: string,"created_at"?: string,"decided_at"?: string | null,"decided_by"?: string | null,"guest_email"?: string,"guest_name"?: string,"guest_phone"?: string | null,"guests_count"?: number,"id"?: string,"locale"?: string,"message"?: string | null,"nationality"?: string | null,"personal_data_deleted_at"?: string | null,"price_snapshot"?: NonNullable<Json>,"privacy_consent_at"?: string | null,"reject_reason"?: string | null,"room_id"?: string,"status"?: Database["public"]['Enums']["booking_status"],"total_amount"?: number,"updated_at"?: string
                   }
                   Relationships: [
                     {
@@ -165,13 +165,26 @@ isOneToOne: false
             [_ in never]: never
           }
           Functions: {
-            "get_booked_ranges":
+            "decide_booking":
+{ Args: { "p_action": string,"p_actor": string,"p_auto_reject_reason": string,"p_booking_id": string,"p_decided_by": string,"p_reason": string }; Returns: {
+              "auto": boolean,"booking_id": string,"new_status": Database["public"]['Enums']["booking_status"]
+            }[]
+                           },
+"expire_stale_bookings":
+{ Args: Record<PropertyKey, never>; Returns: {
+              "booking_id": string
+            }[]
+                           },
+"get_booked_ranges":
 { Args: { "p_room_id"?: string }; Returns: {
               "check_in": string,"check_out": string,"room_id": string,"status": Database["public"]['Enums']["booking_status"]
             }[]
                            },
 "is_admin":
 { Args: Record<PropertyKey, never>; Returns: boolean
+                           },
+"purge_old_personal_data":
+{ Args: Record<PropertyKey, never>; Returns: number
                            }
           }
           Enums: {

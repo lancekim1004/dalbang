@@ -32,12 +32,12 @@ interface PriceSnapshot extends PriceBreakdown {
   checkOut: string;
 }
 
-/** 대기(pending) 상태로 저장하고 예약 번호를 돌려준다. 금액은 서버가 계산한 값만 받는다. */
+/** 대기(pending) 상태로 저장하고 예약 id·번호를 돌려준다. 금액은 서버가 계산한 값만 받는다. */
 export async function createBookingRequest(
   input: BookingRequestInput,
   price: PriceBreakdown,
   room: { monthlyPrice: number; maintenanceFee: number },
-): Promise<string> {
+): Promise<{ id: string; code: string }> {
   const db = getAdminClient();
   const snapshot: PriceSnapshot = {
     ...price,
@@ -76,7 +76,7 @@ export async function createBookingRequest(
     // 처리 기록. 실패해도 요청 자체는 이미 저장됐으므로 기록만 남기고 넘어간다
     const ev = await db.from("booking_events").insert({ booking_id: data.id, from_status: null, to_status: "pending", actor: "guest" });
     if (ev.error) console.error(`[repo-bookings] booking event: ${ev.error.message}`);
-    return code;
+    return { id: data.id, code };
   }
   throw new Error("Failed to create a unique booking code.");
 }

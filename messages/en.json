@@ -278,5 +278,227 @@
       "label": "Paid",
       "body": "Payment received. Your booking is confirmed."
     }
+  },
+  "Admin": {
+    "login": {
+      "title": "Admin sign in",
+      "intro": "For Dalbang staff only.",
+      "email": "Email",
+      "password": "Password",
+      "submit": "Sign in",
+      "signingIn": "Signing in…",
+      "error": {
+        "invalid": "Wrong email or password.",
+        "notAdmin": "This account doesn’t have admin access."
+      }
+    },
+    "nav": {
+      "badge": "Admin",
+      "dashboard": "Dashboard",
+      "bookings": "Requests",
+      "calendar": "Calendar",
+      "listings": "Listings",
+      "signOut": "Sign out"
+    },
+    "dashboard": {
+      "title": "Dashboard",
+      "pending": "Waiting for review",
+      "moveIns": "Move-ins this month",
+      "moveOuts": "Move-outs this month",
+      "failedEmails": "Failed emails",
+      "waiting": "Requests waiting for review",
+      "noneWaiting": "No requests are waiting. 🎉"
+    },
+    "form": {
+      "save": "Save",
+      "saving": "Saving…",
+      "saved": "Saved. Guest pages are updated.",
+      "invalid": "Please check this field.",
+      "fixFields": "Please check the highlighted fields.",
+      "serverError": "Couldn’t save. Please try again.",
+      "public": "Public",
+      "hidden": "Hidden"
+    },
+    "listings": {
+      "title": "Listings",
+      "add": "Add listing",
+      "rooms": "{count, plural, one {# room} other {# rooms}}",
+      "editTitle": "Edit listing",
+      "back": "All listings",
+      "new": "New listing",
+      "viewPublic": "View on site",
+      "roomsTitle": "Rooms",
+      "addRoom": "Add room",
+      "noRooms": "No rooms yet."
+    },
+    "listingForm": {
+      "title": "Title",
+      "type": "Type",
+      "district": "Neighborhood",
+      "station": "Nearest station",
+      "stationPlaceholder": "Hongik Univ. (Line 2) · 5 min walk",
+      "description": "Description",
+      "address": "Address (English)",
+      "addressHint": "Show only the area (e.g. Seogyo-dong, Mapo-gu). The exact address is sent after approval.",
+      "lat": "Latitude",
+      "lng": "Longitude",
+      "coordsHint": "Use a point near the building, not the exact entrance. Find coordinates by right-clicking a spot on a map.",
+      "amenities": "Shared amenities",
+      "published": "Show on the site"
+    },
+    "rooms": {
+      "editTitle": "Edit room",
+      "new": "New room",
+      "viewPublic": "View on site",
+      "hiddenWithPending": "This room is hidden but has {count, plural, one {# pending request} other {# pending requests}}. Those requests stay open — please approve or decline them."
+    },
+    "roomForm": {
+      "name": "Room name",
+      "roomType": "Room type",
+      "monthlyPrice": "Monthly rent",
+      "deposit": "Deposit",
+      "maintenanceFee": "Maintenance fee / month",
+      "wonHint": "Korean won, numbers only",
+      "minNights": "Minimum nights",
+      "minNightsHint": "30 or more",
+      "maxGuests": "Max guests",
+      "size": "Size (m²)",
+      "features": "In this room",
+      "published": "Show on the site"
+    },
+    "photos": {
+      "title": "Photos",
+      "intro": "The first photo is the cover. Large photos are resized automatically before upload.",
+      "none": "No photos yet.",
+      "cover": "Cover",
+      "alt": "Photo description",
+      "altPlaceholder": "e.g. Bright room with a desk by the window",
+      "moveUp": "Move up",
+      "moveDown": "Move down",
+      "delete": "Delete",
+      "confirmDelete": "Really delete?",
+      "file": "Photo (JPG, PNG or WebP)",
+      "upload": "Upload",
+      "working": "Working…",
+      "error": {
+        "invalid": "Please choose a photo and write a short description.",
+        "tooBig": "This photo is too large even after resizing (2.5MB max).",
+        "badType": "Only JPG, PNG or WebP photos can be uploaded.",
+        "server": "Something went wrong. Please try again."
+      }
+    },
+    "bookings": {
+      "title": "Booking requests",
+      "all": "All",
+      "empty": "No requests here."
+    },
+    "booking": {
+      "title": "Booking request",
+      "back": "Back",
+      "request": "Request",
+      "room": "Room",
+      "dates": "Dates",
+      "guests": "Guests",
+      "guest": "Guest",
+      "email": "Email",
+      "phone": "Phone",
+      "nationality": "Nationality",
+      "received": "Received",
+      "consent": "Privacy consent",
+      "reason": "Reason:",
+      "overlapping": "Other requests for the same dates",
+      "noOverlap": "No other requests overlap these dates.",
+      "history": "History",
+      "emails": "Emails",
+      "noEmails": "No emails yet.",
+      "notConfigured": "email sending is not set up yet",
+      "resend": "Send again",
+      "resent": "Sent ✓",
+      "resendFailed": "Failed again",
+      "emailType": {
+        "received": "Request received (guest)",
+        "approved": "Approved (guest)",
+        "rejected": "Declined (guest)",
+        "cancelled": "Cancelled (guest)",
+        "admin_new_request": "New request (admin)"
+      },
+      "emailStatus": {
+        "sent": "sent",
+        "failed": "failed"
+      },
+      "decision": "Decision",
+      "price": "Price (saved at request time)",
+      "note": "Admin note",
+      "noteHint": "Only admins can see this.",
+      "notePlaceholder": "e.g. Called the guest on WhatsApp",
+      "noteSaved": "Note saved.",
+      "approve": "Approve",
+      "reject": "Decline",
+      "cancel": "Cancel booking",
+      "rejectReason": "Reason (sent to the guest)",
+      "cancelReason": "Reason (optional, sent to the guest)",
+      "reasonPlaceholder": "e.g. The room is not available on these dates.",
+      "confirmReject": "Decline request",
+      "confirmCancel": "Cancel booking",
+      "working": "Working…",
+      "closed": "This request is closed. No more actions are possible.",
+      "approveWarning": "Approving will automatically decline {count, plural, one {# other pending request} other {# other pending requests}} for overlapping dates.",
+      "autoRejectReason": "These dates were booked by another guest. Please try other dates or rooms.",
+      "error": {
+        "invalid": "Something is wrong with this request.",
+        "needReason": "Please write a reason for declining.",
+        "overlap": "Can’t approve: another approved booking already uses these dates.",
+        "invalidState": "This request was already handled. Please reload the page.",
+        "server": "Something went wrong. Please try again."
+      },
+      "done": {
+        "approve": "Approved. The guest will be emailed.",
+        "reject": "Declined. The guest will be emailed.",
+        "cancel": "Cancelled. The guest will be emailed."
+      }
+    },
+    "calendar": {
+      "title": "Calendar",
+      "earlier": "Earlier",
+      "today": "Today",
+      "later": "Later",
+      "approved": "Approved",
+      "pending": "Pending",
+      "room": "Room"
+    }
+  },
+  "Email": {
+    "hello": "Hi {name},",
+    "summary": "Booking number: {code}\nRoom: {room} · {listing}\nMove-in: {checkIn}\nMove-out: {checkOut}\nGuests: {guests}\nTotal: {total} (includes a refundable deposit)",
+    "lookupLink": "Check your booking",
+    "reason": "Reason: {reason}",
+    "received": {
+      "subject": "We received your request ({code})",
+      "body": "Thanks for your booking request. The host will review it, usually within 3 days. You won’t be charged anything at this stage.",
+      "next": "We’ll email you again when your request is approved or declined. Keep your booking number — you can check the status any time."
+    },
+    "approved": {
+      "subject": "Your booking is approved ({code})",
+      "body": "Good news — the host approved your request and your dates are now reserved for you.",
+      "address": "Area: {address}. The host will contact you by email with the exact address and move-in instructions.",
+      "next": "Next steps: the host will explain how to pay the deposit and first month’s rent, and arrange your key handover."
+    },
+    "rejected": {
+      "subject": "Update on your request ({code})",
+      "body": "Sorry — the host couldn’t accept this request.",
+      "next": "You’re welcome to request other dates or a different room. No payment was taken.",
+      "link": "See other rooms nearby"
+    },
+    "cancelled": {
+      "subject": "Your booking was cancelled ({code})",
+      "body": "Your approved booking has been cancelled. If you didn’t expect this, please reply to this email."
+    },
+    "admin": {
+      "subject": "New booking request {code}",
+      "body": "A new booking request is waiting for your review.",
+      "guest": "Guest: {name} <{email}>",
+      "message": "Message: {message}",
+      "link": "Review the request"
+    }
   }
 }

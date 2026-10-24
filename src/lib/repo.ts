@@ -4,6 +4,7 @@ import "server-only";
 import { z } from "zod";
 import { addDaysIso, isValidIsoDate, rangesOverlap } from "./dates";
 import type { RoomFilters } from "./search-params";
+import { photoUrl } from "./photo-url";
 import { isConfirmed } from "./stay-rules";
 import { getPublicClient } from "./supabase/public-client";
 import type { Database } from "./supabase/database.types";
@@ -11,6 +12,10 @@ import type { BookedRange, District, Listing, Photo, Room, RoomWithListing } fro
 
 // 예약 저장·조회는 따로 둔 파일에서 (파일 길이 관리용). 화면은 여기서 가져다 쓴다.
 export { createBookingRequest, findBooking, getMyPendingRanges, type BookingSummary } from "./repo-bookings";
+// 관리자 화면용 (부르기 전 requireAdmin 필수)
+export * from "./repo-admin";
+export * from "./repo-admin-listings";
+export * from "./repo-admin-booking";
 
 type Tables = Database["public"]["Tables"];
 type PhotoRow = Pick<Tables["photos"]["Row"], "id" | "storage_path" | "alt_text" | "sort_order">;
@@ -27,11 +32,6 @@ function fail(what: string, error: { message: string }): never {
   throw new Error("Failed to load data.");
 }
 
-/** 사진 위치 → 화면용 주소. 예시 자료는 외부 주소, 올린 사진은 Supabase 사진 창고 */
-function photoUrl(path: string): string {
-  if (/^https?:\/\//.test(path)) return path;
-  return `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/photos/${path}`;
-}
 
 function toPhotos(rows: PhotoRow[]): Photo[] {
   return rows

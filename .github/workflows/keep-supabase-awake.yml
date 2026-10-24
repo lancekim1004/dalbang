@@ -1,0 +1,15 @@
+# Supabase 무료 요금제는 1주일간 아무 접속이 없으면 일시정지된다.
+# 3일마다 사이트의 방 목록(매번 DB를 읽는 화면)을 열어 깨워 둔다. 비밀 값은 필요 없다.
+name: Keep Supabase awake
+on:
+  schedule:
+    - cron: "0 0 */3 * *"
+  workflow_dispatch:
+permissions: {}
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Open the rooms page
+        run: curl --fail --silent --show-error --max-time 60 -o /dev/null -w "%{http_code}\n" https://dalbang.vercel.app/rooms
