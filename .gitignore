@@ -1,0 +1,24 @@
+# 비밀 키 파일 — 절대 GitHub에 올리지 않음
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# Supabase 로컬 임시 파일
+supabase/.temp/
+supabase/.branches/
+
+# Next.js / Node
+node_modules/
+.next/
+out/
+build/
+coverage/
+*.tsbuildinfo
+next-env.d.ts
+.vercel/
+
+# 기타
+.DS_Store
+npm-debug.log*
