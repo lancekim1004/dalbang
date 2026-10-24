@@ -10,7 +10,8 @@
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
     "db:push": "node scripts/supabase-db.mjs db push",
-    "db:types": "node scripts/supabase-db.mjs gen types typescript --schema public > src/lib/supabase/database.types.ts"
+    "db:types": "node scripts/supabase-db.mjs gen types typescript --schema public > src/lib/supabase/database.types.ts",
+    "test:db": "vitest run --config vitest.db.config.mts"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.118.0",
