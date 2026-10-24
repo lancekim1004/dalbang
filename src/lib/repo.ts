@@ -9,6 +9,9 @@ import { getPublicClient } from "./supabase/public-client";
 import type { Database } from "./supabase/database.types";
 import type { BookedRange, District, Listing, Photo, Room, RoomWithListing } from "./types";
 
+// 예약 저장·조회는 따로 둔 파일에서 (파일 길이 관리용). 화면은 여기서 가져다 쓴다.
+export { createBookingRequest, findBooking, getMyPendingRanges, type BookingSummary } from "./repo-bookings";
+
 type Tables = Database["public"]["Tables"];
 type PhotoRow = Pick<Tables["photos"]["Row"], "id" | "storage_path" | "alt_text" | "sort_order">;
 

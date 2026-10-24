@@ -13,13 +13,15 @@
   "Nav": {
     "rooms": "Find a room",
     "howItWorks": "How it works",
-    "home": "Dalbang home"
+    "home": "Dalbang home",
+    "lookup": "My booking"
   },
   "Footer": {
     "about": "Dalbang (달방) — the Korean way to rent a room by the month.",
     "demo": "This site is a portfolio project. Listings, photos and prices are for demonstration only.",
     "photos": "Photos: Unsplash",
-    "map": "Map data © OpenStreetMap contributors"
+    "map": "Map data © OpenStreetMap contributors",
+    "lookup": "Check your booking"
   },
   "Home": {
     "eyebrow": "Dalbang · 달방",
@@ -103,7 +105,6 @@
     "nights": "{count, plural, one {# night} other {# nights}}",
     "pickDates": "Choose your dates to see the full price.",
     "request": "Request to book",
-    "requestSoon": "Booking requests open in the next update of this demo.",
     "noPayment": "You won't be charged. The host reviews your request first."
   },
   "StayErrors": {
@@ -171,5 +172,111 @@
     "title": "Something went wrong",
     "body": "Please try again in a moment.",
     "retry": "Try again"
+  },
+  "Request": {
+    "metaTitle": "Request {room}",
+    "back": "Back to the room",
+    "title": "Request to book",
+    "intro": "Send your dates and details. The host reviews your request and replies by email — usually within 3 days.",
+    "perMonth": "{amount} / month",
+    "datesTitle": "Your stay",
+    "moveIn": "Move-in",
+    "moveOut": "Move-out",
+    "guests": "Guests",
+    "pickDates": "Choose your dates to see the full price.",
+    "aboutYou": "About you",
+    "name": "Full name",
+    "email": "Email",
+    "emailHint": "We send your booking number and the host’s reply here.",
+    "phone": "Phone or WhatsApp",
+    "nationality": "Nationality",
+    "optional": "(optional)",
+    "message": "Message to the host",
+    "messagePlaceholder": "Tell the host a little about yourself and why you are coming to Seoul.",
+    "consent": "I agree that Dalbang may use my details to process this booking request and contact me about it.",
+    "fixFields": "Please check the highlighted fields.",
+    "submit": "Send booking request",
+    "sending": "Sending…",
+    "noPayment": "You won’t be charged. This is a request, not a confirmed booking.",
+    "invalid": {
+      "roomId": "This room is not available.",
+      "checkIn": "Please choose a valid move-in date.",
+      "checkOut": "Please choose a valid move-out date.",
+      "guests": "Please choose the number of guests.",
+      "name": "Please enter your name.",
+      "email": "Please enter a valid email address.",
+      "phone": "Please check your phone number.",
+      "nationality": "Please check your nationality.",
+      "message": "Your message is too long (1,000 characters max).",
+      "consent": "Please agree to continue."
+    }
+  },
+  "RequestErrors": {
+    "roomUnavailable": "This room is not available.",
+    "tooManyGuests": "This room fits up to {guests, plural, one {# guest} other {# guests}}.",
+    "duplicatePending": "You already have a pending request for these dates. Please wait for the host’s reply.",
+    "server": "Sorry, we couldn’t send your request. Please try again in a moment."
+  },
+  "Submitted": {
+    "title": "Request sent!",
+    "body": "Thank you. Your request has been received and is waiting for the host’s review.",
+    "codeLabel": "Your booking number",
+    "codeHint": "Save this number. You need it with your email to check your booking.",
+    "next1": "The host reviews your request, usually within 3 days.",
+    "next2": "You’ll get an email when it is approved or declined.",
+    "next3": "If approved, the email explains how to move in and pay the deposit.",
+    "lookup": "Check my booking",
+    "browse": "Browse more rooms",
+    "metaTitle": "Request sent"
+  },
+  "Lookup": {
+    "title": "Check your booking",
+    "intro": "Enter your booking number and the email you used for the request.",
+    "code": "Booking number",
+    "email": "Email",
+    "submit": "Check status",
+    "searching": "Checking…",
+    "error": {
+      "invalid": "Please enter a booking number like DB-7K3Q9P and a valid email.",
+      "notFound": "We couldn’t find a booking with that number and email.",
+      "server": "Sorry, something went wrong. Please try again in a moment."
+    },
+    "reason": "Reason:",
+    "room": "Room",
+    "moveIn": "Move-in",
+    "moveOut": "Move-out",
+    "guests": "Guests",
+    "name": "Name",
+    "total": "Total {amount}"
+  },
+  "Status": {
+    "pending": {
+      "label": "Waiting for review",
+      "body": "The host is reviewing your request. We’ll email you when there is a decision."
+    },
+    "approved": {
+      "label": "Approved",
+      "body": "Your dates are confirmed. Check your email for move-in details."
+    },
+    "rejected": {
+      "label": "Declined",
+      "body": "Sorry, the host couldn’t accept this request. You can request other dates or rooms."
+    },
+    "cancelled": {
+      "label": "Cancelled",
+      "body": "This booking has been cancelled."
+    },
+    "expired": {
+      "label": "Expired",
+      "body": "This request expired before it was reviewed. You are welcome to send a new request."
+    },
+    "awaiting_payment": {
+      "label": "Awaiting payment",
+      "body": "Your request is approved. Please complete the payment to confirm."
+    },
+    "paid": {
+      "label": "Paid",
+      "body": "Payment received. Your booking is confirmed."
+    }
   }
 }

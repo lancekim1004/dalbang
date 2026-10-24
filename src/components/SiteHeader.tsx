@@ -14,6 +14,9 @@ export function SiteHeader() {
           <Link href="/#how" className="hidden rounded-full px-3 py-2 text-muted hover:text-ink sm:inline">
             {t("howItWorks")}
           </Link>
+          <Link href="/booking/lookup" className="rounded-full px-3 py-2 text-muted hover:text-ink">
+            {t("lookup")}
+          </Link>
           <Link href="/rooms" className="rounded-full bg-ink px-4 py-2 font-medium text-white hover:bg-ink-soft">
             {t("rooms")}
           </Link>

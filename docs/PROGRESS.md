@@ -8,9 +8,9 @@
 
 | 항목 | 내용 |
 |---|---|
-| 현재 단계 | 1단계 완료 — https://dalbang.vercel.app 배포·휴대폰 확인 끝 |
+| 현재 단계 | 2단계 진행 중 — 예약 요청·완료·조회 화면과 서버 검사 완성 |
 | 마지막 작업일 | 2026-10-24 |
-| 다음 할 일 | 2단계 2-1(예약 요청·완료·조회 화면) 시작. 2-8 전에 사이트 전용 Gmail 준비 |
+| 다음 할 일 | Vercel에 `SUPABASE_SECRET_KEY` 추가(사용자) → 2-3 DB 겹침 금지 자동 테스트 → 2-4 관리자 로그인. 2-8 전에 사이트 전용 Gmail 준비 |
 | 막힌 점 | 없음 |
 
 ## 1단계 — 기반 + 손님용 둘러보기 화면
@@ -32,8 +32,8 @@
 
 | # | 작업 | 상태 | 완료일 | 메모 |
 |---|---|---|---|---|
-| 2-1 | 예약 요청 / 완료 / 조회 화면 | ⬜ | | |
-| 2-2 | 요청 조건 서버 검사 | ⬜ | | |
+| 2-1 | 예약 요청 / 완료 / 조회 화면 | ✅ | 2026-10-24 | `/rooms/[id]/request`, `/booking/submitted`, `/booking/lookup`. 개인정보 동의 체크 포함 (처리방침 화면 링크는 3-1에서) |
+| 2-2 | 요청 조건 서버 검사 | ✅ | 2026-10-24 | `booking-rules.ts` + 시험 14개. 서버가 총액 재계산·저장. 스팸 방지·횟수 제한은 3-3에서 |
 | 2-3 | DB 겹침 금지 규칙 + 동시 요청 테스트 | 🟨 | | 겹침 금지 제약은 1-2에서 적용·수동 확인 완료. 자동 테스트 남음 |
 | 2-4 | 관리자 로그인 · 접근 차단 | ⬜ | | |
 | 2-5 | 숙소·방 등록·수정·숨기기 | ⬜ | | |
@@ -67,10 +67,13 @@
 | 2026-10-24 | Supabase 연결: 마이그레이션 3개(표·RLS·표 권한) 적용, 예시 자료 DB에 넣음, `repo.ts`를 DB 읽기로 교체, 시험 29개·빌드 통과 | GitHub·Vercel 배포 |
 | 2026-10-24 | 키 노출로 기존 도쿄 프로젝트 삭제 → 서울에 새 프로젝트 생성, 마이그레이션·예시 자료 다시 적용, 보안 시험 통과 | GitHub·Vercel 배포 |
 | 2026-10-24 | GitHub 공개 저장소 생성·올리기, Vercel 배포(서울 서버), 배포 주소에서 화면 전체 확인 | 휴대폰 확인, 2단계 시작 |
+| 2026-10-24 | 2-1·2-2: 예약 요청·완료·조회 화면, 서버 검사·금액 재계산, 브라우저로 요청→조회→중복·겹침 거부 확인, 시험 43개·빌드 통과. 공부 노트(LEARNING.md) 시작 | Vercel 비밀 키 추가, 2-3 |
 
 ## 알아둘 점
 - **사이트 주소:** https://dalbang.vercel.app — GitHub `main`에 올리면 Vercel이 자동으로 다시 배포함.
-- **Vercel 환경변수:** 지금은 `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` 2개만. 비밀 키는 2단계에서 서버 기능이 생길 때 Vercel 화면에 직접 추가.
+- **Vercel 환경변수:** `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` + (2-1부터 필요) `SUPABASE_SECRET_KEY`. 비밀 키는 Vercel 화면에 직접 넣고 Sensitive 켜기.
+- **예약 저장 구조:** 방문자 화면은 공개 키로 읽기만. 예약 저장·조회는 서버 액션(`src/app/booking/actions.ts`)이 비밀 키(`src/lib/supabase/admin-client.ts`)로 처리.
+- 시험용 예약 `DB-JLJPXY`(test-request@example.com)가 DB에 남아 있음 (2026-10-24 브라우저 시험).
 - **GitHub 도구:** `gh`가 `~/.local/bin/gh`에 설치·로그인돼 있음 (계정 lancekim1004).
 - **Next.js 16.4** 사용. 예전 버전과 다른 점이 많아 코드 작성 전 `AGENTS.md` 안내대로 `node_modules/next/dist/docs/`를 확인할 것.
 - 새 캐시 기능(`cacheComponents`)은 **꺼 둠** — 초보자 관리가 쉬운 기존 방식 사용.

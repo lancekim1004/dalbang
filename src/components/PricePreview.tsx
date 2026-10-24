@@ -1,15 +1,17 @@
 "use client";
 // 방 상세의 "날짜 고르면 총액 바로 보기". 계산은 lib/pricing.ts, 조건은 lib/stay-rules.ts 사용.
 import { useMemo, useState } from "react";
+import Link from "next/link";
 import { useTranslations } from "next-intl";
 import { addDaysIso, addMonthsIso, nightsBetween, todayInSeoul } from "@/lib/dates";
 import { formatKRW } from "@/lib/format";
 import { calcPrice } from "@/lib/pricing";
+import { PriceBreakdownList } from "./PriceBreakdownList";
 import { checkStay, MAX_MONTHS_AHEAD, MIN_NIGHTS } from "@/lib/stay-rules";
 import type { BookedRange } from "@/lib/types";
 
 interface Props {
-  room: { monthlyPrice: number; deposit: number; maintenanceFee: number; minNights: number };
+  room: { id: string; monthlyPrice: number; deposit: number; maintenanceFee: number; minNights: number };
   booked: BookedRange[];
   initialMoveIn?: string;
   initialMonths?: number;
@@ -88,24 +90,20 @@ export function PricePreview({ room, booked, initialMoveIn, initialMonths }: Pro
         {result && "error" in result && (
           <p className="rounded-lg bg-booked/60 px-3 py-2 text-ink">{te(result.error!, { nights: minNights })}</p>
         )}
-        {result && "price" in result && result.price && (
-          <dl className="space-y-1.5">
-            <div className="flex justify-between text-muted"><dt>{t("nights", { count: result.price.nights })}</dt></div>
-            <div className="flex justify-between"><dt>{t("rentMonths", { count: result.price.months })}</dt><dd>{formatKRW(result.price.rentForMonths)}</dd></div>
-            {result.price.extraDays > 0 && (
-              <div className="flex justify-between"><dt>{t("rentDays", { count: result.price.extraDays, daily: formatKRW(result.price.dailyRate) })}</dt><dd>{formatKRW(result.price.rentForExtraDays)}</dd></div>
-            )}
-            <div className="flex justify-between"><dt>{t("maintenanceMonths", { count: result.price.months })}</dt><dd>{formatKRW(result.price.maintenanceTotal)}</dd></div>
-            <div className="flex justify-between"><dt>{t("depositOnce")}</dt><dd>{formatKRW(result.price.deposit)}</dd></div>
-            <div className="flex justify-between border-t border-line pt-2 text-base font-bold"><dt>{t("total")}</dt><dd>{formatKRW(result.price.total)}</dd></div>
-          </dl>
-        )}
+        {result && "price" in result && result.price && <PriceBreakdownList price={result.price} />}
       </div>
 
-      <button type="button" disabled className="mt-4 w-full cursor-not-allowed rounded-xl bg-ink/40 py-3 text-sm font-semibold text-white">
-        {t("request")}
-      </button>
-      <p className="mt-2 text-center text-xs text-muted">{t("requestSoon")}</p>
+      {result && "price" in result ? (
+        <Link href={`/rooms/${room.id}/request?checkIn=${checkIn}&checkOut=${checkOut}`}
+          className="mt-4 block w-full rounded-xl bg-ink py-3 text-center text-sm font-semibold text-white hover:bg-ink-soft">
+          {t("request")}
+        </Link>
+      ) : (
+        <button type="button" disabled className="mt-4 w-full cursor-not-allowed rounded-xl bg-ink/40 py-3 text-sm font-semibold text-white">
+          {t("request")}
+        </button>
+      )}
+      <p className="mt-2 text-center text-xs text-muted">{t("noPayment")}</p>
     </section>
   );
 }

@@ -1,0 +1,51 @@
+"use server";
+// 예약 요청 접수·조회. 누구나 직접 호출할 수 있으므로 화면에서 검사했더라도 여기서 전부 다시 검사한다.
+import { redirect } from "next/navigation";
+import { z } from "zod";
+import { bookingCodeSchema, bookingRequestSchema, evaluateRequest, type RequestError, type RequestField } from "@/lib/booking-rules";
+import { createBookingRequest, findBooking, getBookedRanges, getMyPendingRanges, getRoom, type BookingSummary } from "@/lib/repo";
+
+export type RequestState = { error?: RequestError | "server"; invalidFields?: RequestField[] } | null;
+
+export async function submitBookingRequest(_prev: RequestState, formData: FormData): Promise<RequestState> {
+  const parsed = bookingRequestSchema.safeParse(Object.fromEntries(formData));
+  if (!parsed.success) {
+    const invalidFields = [...new Set(parsed.error.issues.map((i) => i.path[0] as RequestField))];
+    return { invalidFields };
+  }
+  const input = parsed.data;
+
+  let code: string;
+  try {
+    const [room, booked, myPending] = await Promise.all([
+      getRoom(input.roomId),
+      getBookedRanges(input.roomId),
+      getMyPendingRanges(input.roomId, input.email),
+    ]);
+    const result = evaluateRequest({ input, room, booked, myPending });
+    if ("error" in result) return { error: result.error };
+    // 금액은 화면에서 보낸 값이 아니라 서버가 방금 계산한 값으로 저장
+    code = await createBookingRequest(input, result.price, room!);
+  } catch {
+    return { error: "server" };
+  }
+  redirect(`/booking/submitted?code=${code}`);
+}
+
+export type LookupState = { booking?: BookingSummary; error?: "invalid" | "notFound" | "server" } | null;
+
+const lookupSchema = z.object({
+  code: bookingCodeSchema,
+  email: z.preprocess((v) => (typeof v === "string" ? v.trim().toLowerCase() : v), z.email()),
+});
+
+export async function lookupBooking(_prev: LookupState, formData: FormData): Promise<LookupState> {
+  const parsed = lookupSchema.safeParse(Object.fromEntries(formData));
+  if (!parsed.success) return { error: "invalid" };
+  try {
+    const booking = await findBooking(parsed.data.code, parsed.data.email);
+    return booking ? { booking } : { error: "notFound" };
+  } catch {
+    return { error: "server" };
+  }
+}
