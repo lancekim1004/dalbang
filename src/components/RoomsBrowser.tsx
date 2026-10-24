@@ -15,13 +15,14 @@ export function RoomsBrowser({ list, map }: { list: React.ReactNode; map: React.
           {map}
         </div>
       </div>
+      {/* 바뀌는 글자를 <span>으로 감싸 둠: 브라우저 자동 번역이 글자를 바꿔 끼워도 화면이 멈추지 않게 */}
       <button
         type="button"
         onClick={() => setView(view === "list" ? "map" : "list")}
         className="fixed bottom-5 left-1/2 z-[1100] inline-flex -translate-x-1/2 items-center gap-2 rounded-full bg-ink px-5 py-3 text-sm font-semibold text-white shadow-xl lg:hidden"
       >
         {view === "list" ? <MapIcon className="h-4 w-4" aria-hidden="true" /> : <List className="h-4 w-4" aria-hidden="true" />}
-        {view === "list" ? t("showMap") : t("showList")}
+        <span key={view}>{view === "list" ? t("showMap") : t("showList")}</span>
       </button>
     </div>
   );

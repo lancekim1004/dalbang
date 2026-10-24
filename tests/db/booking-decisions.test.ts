@@ -77,3 +77,13 @@ describe("purge_old_personal_data", () => {
     expect(data!.personal_data_deleted_at).not.toBeNull();
   });
 });
+
+describe("hit_rate_limit", () => {
+  it("한도까지는 허용, 넘으면 거부", async () => {
+    const key = `test:${Date.now()}`;
+    const results = [];
+    for (let i = 0; i < 4; i++) results.push((await db.rpc("hit_rate_limit", { p_key: key, p_limit: 3, p_window_seconds: 3600 })).data);
+    expect(results).toEqual([true, true, true, false]);
+    await db.from("rate_limits").delete().eq("key", key);
+  });
+});

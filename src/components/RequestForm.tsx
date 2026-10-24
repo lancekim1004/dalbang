@@ -9,6 +9,7 @@ import { calcPrice } from "@/lib/pricing";
 import { checkStay, MAX_MONTHS_AHEAD, MIN_NIGHTS } from "@/lib/stay-rules";
 import type { BookedRange } from "@/lib/types";
 import { PriceBreakdownList } from "./PriceBreakdownList";
+import { Turnstile } from "./Turnstile";
 
 interface Props {
   room: { id: string; monthlyPrice: number; deposit: number; maintenanceFee: number; minNights: number; maxGuests: number };
@@ -116,10 +117,13 @@ export function RequestForm({ room, booked, initialCheckIn = "", initialCheckOut
       <label className="flex items-start gap-3 text-sm">
         <input type="checkbox" name="consent" required aria-invalid={invalid("consent")} className="mt-0.5 h-5 w-5 shrink-0 accent-ink" />
         <span>
-          {t("consent")}
+          {t("consent")}{" "}
+          <a href="/privacy" target="_blank" rel="noopener" className="underline underline-offset-2">{t("privacyLink")}</a>
           {fieldError("consent")}
         </span>
       </label>
+
+      <Turnstile />
 
       {(state?.error || (state?.invalidFields && state.invalidFields.length > 0)) && (
         <p role="alert" className="rounded-xl bg-red-50 px-4 py-3 text-sm text-red-700">
@@ -129,7 +133,7 @@ export function RequestForm({ room, booked, initialCheckIn = "", initialCheckOut
 
       <button type="submit" disabled={pending}
         className="w-full rounded-xl bg-ink py-3.5 text-base font-semibold text-white hover:bg-ink-soft disabled:cursor-wait disabled:bg-ink/50">
-        {pending ? t("sending") : t("submit")}
+        <span key={String(pending)}>{pending ? t("sending") : t("submit")}</span>
       </button>
       <p className="text-center text-xs text-muted">{t("noPayment")}</p>
     </form>

@@ -35,7 +35,7 @@ export function SaveBar({ pending, saveLabel, savingLabel, message }: { pending:
   return (
     <div className="flex flex-wrap items-center gap-3">
       <button type="submit" disabled={pending} className="rounded-xl bg-ink px-6 py-2.5 text-sm font-semibold text-white disabled:bg-ink/50">
-        {pending ? savingLabel : saveLabel}
+        <span key={String(pending)}>{pending ? savingLabel : saveLabel}</span>
       </button>
       {message && <p role="alert" className="text-sm text-red-700">{message}</p>}
     </div>

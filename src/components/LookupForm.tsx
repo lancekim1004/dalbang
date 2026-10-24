@@ -44,7 +44,7 @@ export function LookupForm({ initialCode = "" }: { initialCode?: string }) {
         </label>
         {state?.error && <p role="alert" className="rounded-xl bg-red-50 px-4 py-3 text-sm text-red-700">{t(`error.${state.error}`)}</p>}
         <button type="submit" disabled={pending} className="w-full rounded-xl bg-ink py-3 text-sm font-semibold text-white disabled:bg-ink/50">
-          {pending ? t("searching") : t("submit")}
+          <span key={String(pending)}>{pending ? t("searching") : t("submit")}</span>
         </button>
       </form>
 

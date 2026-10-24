@@ -3,9 +3,10 @@
 import { redirect } from "next/navigation";
 import { z } from "zod";
 import { getAdmin } from "@/lib/admin-auth";
+import { allowRequest } from "@/lib/rate-limit";
 import { getSessionClient } from "@/lib/supabase/session-client";
 
-export type LoginState = { error?: "invalid" | "notAdmin" } | null;
+export type LoginState = { error?: "invalid" | "notAdmin" | "tooMany" } | null;
 
 const schema = z.object({
   email: z.preprocess((v) => (typeof v === "string" ? v.trim().toLowerCase() : v), z.email()),
@@ -13,6 +14,7 @@ const schema = z.object({
 });
 
 export async function signIn(_prev: LoginState, formData: FormData): Promise<LoginState> {
+  if (!(await allowRequest("login"))) return { error: "tooMany" };
   const parsed = schema.safeParse(Object.fromEntries(formData));
   if (!parsed.success) return { error: "invalid" };
   const supabase = await getSessionClient();

@@ -28,7 +28,7 @@ export function ResendButton({ logId }: { logId: string }) {
   return (
     <button type="button" disabled={pending} onClick={() => start(async () => setResult(await resendEmail(logId)))}
       className="rounded-full border border-line px-3 py-1 text-xs hover:border-ink disabled:opacity-50">
-      {pending ? t("working") : result === null ? t("resend") : result ? t("resent") : t("resendFailed")}
+      <span key={`${pending}-${result}`}>{pending ? t("working") : result === null ? t("resend") : result ? t("resent") : t("resendFailed")}</span>
     </button>
   );
 }

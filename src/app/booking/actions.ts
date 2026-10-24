@@ -5,9 +5,10 @@ import { after } from "next/server";
 import { z } from "zod";
 import { bookingCodeSchema, bookingRequestSchema, evaluateRequest, type RequestError, type RequestField } from "@/lib/booking-rules";
 import { sendBookingEmail } from "@/lib/mail/send-booking-email";
+import { allowRequest, verifyTurnstile } from "@/lib/rate-limit";
 import { createBookingRequest, findBooking, getBookedRanges, getMyPendingRanges, getRoom, type BookingSummary } from "@/lib/repo";
 
-export type RequestState = { error?: RequestError | "server"; invalidFields?: RequestField[] } | null;
+export type RequestState = { error?: RequestError | "server" | "tooMany" | "captcha"; invalidFields?: RequestField[] } | null;
 
 export async function submitBookingRequest(_prev: RequestState, formData: FormData): Promise<RequestState> {
   const parsed = bookingRequestSchema.safeParse(Object.fromEntries(formData));
@@ -16,6 +17,9 @@ export async function submitBookingRequest(_prev: RequestState, formData: FormDa
     return { invalidFields };
   }
   const input = parsed.data;
+  // 스팸 방지: 로봇 확인(설정된 경우) → 같은 접속지 횟수 제한
+  if (!(await verifyTurnstile(formData.get("cf-turnstile-response")))) return { error: "captcha" };
+  if (!(await allowRequest("request"))) return { error: "tooMany" };
 
   let code: string;
   try {
@@ -40,7 +44,7 @@ export async function submitBookingRequest(_prev: RequestState, formData: FormDa
   redirect(`/booking/submitted?code=${code}`);
 }
 
-export type LookupState = { booking?: BookingSummary; error?: "invalid" | "notFound" | "server" } | null;
+export type LookupState = { booking?: BookingSummary; error?: "invalid" | "notFound" | "server" | "tooMany" } | null;
 
 const lookupSchema = z.object({
   code: bookingCodeSchema,
@@ -48,6 +52,8 @@ const lookupSchema = z.object({
 });
 
 export async function lookupBooking(_prev: LookupState, formData: FormData): Promise<LookupState> {
+  // 번호를 마구 넣어 보는 것을 막기 위해 시도할 때마다 센다
+  if (!(await allowRequest("lookup"))) return { error: "tooMany" };
   const parsed = lookupSchema.safeParse(Object.fromEntries(formData));
   if (!parsed.success) return { error: "invalid" };
   try {

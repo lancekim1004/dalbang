@@ -1,5 +1,5 @@
 // 하루 한 번 자동 실행 (Vercel Cron, vercel.json 참고)
-// 1) 3일 넘게 처리 안 된 / 입주일 지난 대기 요청 만료  2) 오래된 개인정보 삭제
+// 1) 3일 넘게 처리 안 된 / 입주일 지난 대기 요청 만료  2) 오래된 개인정보 삭제  3) 지난 횟수 제한 기록 정리
 // Vercel이 CRON_SECRET을 담아 부른다. 비밀 값이 안 맞으면 아무것도 하지 않는다.
 import { timingSafeEqual } from "node:crypto";
 import { NextResponse, type NextRequest } from "next/server";
@@ -17,7 +17,7 @@ function authorized(request: NextRequest): boolean {
 export async function GET(request: NextRequest) {
   if (!authorized(request)) return NextResponse.json({ error: "unauthorized" }, { status: 401 });
   const db = getAdminClient();
-  const [expired, purged] = await Promise.all([db.rpc("expire_stale_bookings"), db.rpc("purge_old_personal_data")]);
+  const [expired, purged] = await Promise.all([db.rpc("expire_stale_bookings"), db.rpc("purge_old_personal_data"), db.rpc("cleanup_rate_limits")]);
   if (expired.error || purged.error) {
     console.error(`[cron] expire: ${expired.error?.message ?? "ok"} / purge: ${purged.error?.message ?? "ok"}`);
     return NextResponse.json({ error: "failed" }, { status: 500 });

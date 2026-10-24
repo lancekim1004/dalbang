@@ -139,6 +139,20 @@ isOneToOne: false
       referencedColumns: ["id"]
     }
                   ]
+                },"rate_limits": {
+                  Row: {
+                    "count": number,"created_at": string,"key": string,"updated_at": string,"window_start": string
+                  }
+                  ComputedFields: never
+                  Insert: {
+                    "count"?: number,"created_at"?: string,"key": string,"updated_at"?: string,"window_start": string
+                  }
+                  Update: {
+                    "count"?: number,"created_at"?: string,"key"?: string,"updated_at"?: string,"window_start"?: string
+                  }
+                  Relationships: [
+                    
+                  ]
                 },"rooms": {
                   Row: {
                     "created_at": string,"deposit": number,"features": (string)[],"id": string,"is_published": boolean,"listing_id": string,"maintenance_fee": number,"max_guests": number,"min_nights": number,"monthly_price": number,"name": string,"room_type": Database["public"]['Enums']["room_type"],"size_m2": number | null,"updated_at": string
@@ -165,7 +179,10 @@ isOneToOne: false
             [_ in never]: never
           }
           Functions: {
-            "decide_booking":
+            "cleanup_rate_limits":
+{ Args: Record<PropertyKey, never>; Returns: undefined
+                           },
+"decide_booking":
 { Args: { "p_action": string,"p_actor": string,"p_auto_reject_reason": string,"p_booking_id": string,"p_decided_by": string,"p_reason": string }; Returns: {
               "auto": boolean,"booking_id": string,"new_status": Database["public"]['Enums']["booking_status"]
             }[]
@@ -179,6 +196,9 @@ isOneToOne: false
 { Args: { "p_room_id"?: string }; Returns: {
               "check_in": string,"check_out": string,"room_id": string,"status": Database["public"]['Enums']["booking_status"]
             }[]
+                           },
+"hit_rate_limit":
+{ Args: { "p_key": string,"p_limit": number,"p_window_seconds": number }; Returns: boolean
                            },
 "is_admin":
 { Args: Record<PropertyKey, never>; Returns: boolean

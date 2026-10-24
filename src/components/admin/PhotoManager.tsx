@@ -85,7 +85,7 @@ export function PhotoManager({ owner, photos }: { owner: { kind: "listing" | "ro
           <input name="alt" required maxLength={200} placeholder={t("altPlaceholder")} className={inputClass()} />
         </label>
         <button type="submit" disabled={pending} className="rounded-xl bg-ink px-5 py-2.5 text-sm font-semibold text-white disabled:bg-ink/50">
-          {pending ? t("working") : t("upload")}
+          <span key={String(pending)}>{pending ? t("working") : t("upload")}</span>
         </button>
       </form>
       {message && <p role="alert" className="text-sm text-red-700">{message}</p>}

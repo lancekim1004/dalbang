@@ -10,7 +10,12 @@ export function SiteFooter() {
         <Logo className="text-ink" />
         <p>{t("about")}</p>
         <p>{t("demo")}</p>
-        <p><Link href="/booking/lookup" className="underline underline-offset-2">{t("lookup")}</Link></p>
+        <nav className="flex flex-wrap gap-x-4 gap-y-1">
+          <Link href="/booking/lookup" className="underline underline-offset-2">{t("lookup")}</Link>
+          <Link href="/faq" className="underline underline-offset-2">{t("faq")}</Link>
+          <Link href="/terms" className="underline underline-offset-2">{t("terms")}</Link>
+          <Link href="/privacy" className="underline underline-offset-2">{t("privacy")}</Link>
+        </nav>
         <p className="text-xs">
           {t("photos")} · {t("map")}
         </p>
