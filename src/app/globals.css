@@ -1,0 +1,51 @@
+@import "tailwindcss";
+
+/* Dalbang 색상: 밤하늘(ink) + 달빛(moon) + 따뜻한 종이색 배경 */
+@theme {
+  --color-ink: #16213a;
+  --color-ink-soft: #2c3a5c;
+  --color-moon: #f2c14e;
+  --color-moon-soft: #fdf3d8;
+  --color-paper: #fbf8f3;
+  --color-line: #e8e2d8;
+  --color-muted: #6b6f7b;
+  --color-booked: #f4d6d1;
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+}
+
+:root {
+  color-scheme: light;
+}
+
+body {
+  background: var(--color-paper);
+  color: var(--color-ink);
+}
+
+/* 날짜 입력칸 높이 통일 (iOS) */
+input[type="date"] {
+  min-height: 2.75rem;
+  min-width: 0;
+  max-width: 100%;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+/* 지도 위 가격 핀 */
+.price-pin {
+  background: white;
+  color: var(--color-ink);
+  border: 1px solid var(--color-line);
+  border-radius: 9999px;
+  padding: 2px 8px;
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+  box-shadow: 0 1px 4px rgb(0 0 0 / 0.15);
+  transform: translate(-50%, -50%);
+  display: inline-block;
+}
+.price-pin.active {
+  background: var(--color-ink);
+  color: white;
+}

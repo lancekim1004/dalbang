@@ -1,0 +1,175 @@
+{
+  "Meta": {
+    "siteName": "Dalbang",
+    "tagline": "Monthly rooms in Seoul",
+    "homeTitle": "Dalbang · Monthly Rooms & Long Stays in Seoul",
+    "homeDescription": "Find a room in Seoul by the month. Share houses, studios and apartments for stays of 30 nights or more — clear prices, English support, request online.",
+    "roomsTitle": "Monthly rooms in Seoul",
+    "roomsDescription": "Browse share house rooms, studios and apartments for stays of 30+ nights across Seoul."
+  },
+  "Demo": {
+    "banner": "Portfolio demo — listings are sample data."
+  },
+  "Nav": {
+    "rooms": "Find a room",
+    "howItWorks": "How it works",
+    "home": "Dalbang home"
+  },
+  "Footer": {
+    "about": "Dalbang (달방) — the Korean way to rent a room by the month.",
+    "demo": "This site is a portfolio project. Listings, photos and prices are for demonstration only.",
+    "photos": "Photos: Unsplash",
+    "map": "Map data © OpenStreetMap contributors"
+  },
+  "Home": {
+    "eyebrow": "Dalbang · 달방",
+    "headline": "Your home in Seoul, by the month",
+    "sub": "Rooms in share houses, studios and apartments for stays of 30 nights or more. See the full price upfront and request your dates online.",
+    "featured": "Rooms to start with",
+    "seeAll": "See all rooms",
+    "districts": "Explore by neighborhood",
+    "howTitle": "How it works",
+    "step1Title": "Find your room",
+    "step1Body": "Search by neighborhood, move-in date and budget. Every room shows rent, deposit and fees.",
+    "step2Title": "Send a request",
+    "step2Body": "Pick your dates (30 nights minimum) and send a booking request. No payment needed.",
+    "step3Title": "Get confirmed by email",
+    "step3Body": "We check your request and reply by email with next steps for moving in.",
+    "whatIs": "What is a dalbang?",
+    "whatIsBody": "In Korean, dal (달) means month and bang (방) means room. A dalbang is a room you rent month to month — no long lease, no Korean bank account needed to start."
+  },
+  "Search": {
+    "district": "Neighborhood",
+    "anyDistrict": "All of Seoul",
+    "moveIn": "Move-in",
+    "stay": "Stay",
+    "months": "{count, plural, one {# month} other {# months}}",
+    "budget": "Max rent / month",
+    "anyBudget": "Any budget",
+    "upTo": "Up to {amount}",
+    "submit": "Search",
+    "reset": "Clear filters"
+  },
+  "Rooms": {
+    "heading": "Monthly rooms in Seoul",
+    "inDistrict": "Rooms in {district}",
+    "count": "{count, plural, =0 {No rooms found} one {# room} other {# rooms}}",
+    "availableFrom": "available from {date}",
+    "sort": "Sort",
+    "sortRecommended": "Recommended",
+    "sortPriceAsc": "Price: low to high",
+    "sortPriceDesc": "Price: high to low",
+    "showMap": "Map",
+    "showList": "List",
+    "emptyTitle": "No rooms match your search",
+    "emptyBody": "Try another neighborhood, a later move-in date, or a higher budget.",
+    "perMonth": "/ month",
+    "deposit": "Deposit {amount}",
+    "viewRoom": "View room"
+  },
+  "Room": {
+    "back": "All rooms",
+    "inListing": "in {listing}",
+    "guests": "{count, plural, one {Up to # guest} other {Up to # guests}}",
+    "size": "{size} m²",
+    "minStay": "Minimum {nights} nights",
+    "features": "In this room",
+    "aboutListing": "About {listing}",
+    "sharedAmenities": "Shared amenities",
+    "location": "Location",
+    "locationNote": "The map shows the approximate area. The exact address is shared by email after your request is approved.",
+    "nearestStation": "Nearest station",
+    "availability": "Availability",
+    "booked": "Booked",
+    "available": "Available",
+    "otherRooms": "Other rooms in this building",
+    "viewListing": "See the building"
+  },
+  "Price": {
+    "title": "Check your price",
+    "monthly": "Monthly rent",
+    "deposit": "Deposit",
+    "maintenance": "Maintenance fee",
+    "perMonth": "{amount} / month",
+    "refundable": "Refundable when you move out",
+    "moveIn": "Move-in",
+    "moveOut": "Move-out",
+    "quick": "Quick pick",
+    "rentMonths": "Rent × {count, plural, one {# month} other {# months}}",
+    "rentDays": "Rent × {count, plural, one {# day} other {# days}} ({daily}/day)",
+    "maintenanceMonths": "Maintenance × {count, plural, one {# month} other {# months}}",
+    "depositOnce": "Deposit (refundable)",
+    "total": "Total",
+    "nights": "{count, plural, one {# night} other {# nights}}",
+    "pickDates": "Choose your dates to see the full price.",
+    "request": "Request to book",
+    "requestSoon": "Booking requests open in the next update of this demo.",
+    "noPayment": "You won't be charged. The host reviews your request first."
+  },
+  "StayErrors": {
+    "invalidDate": "Please choose valid dates.",
+    "checkoutBeforeCheckin": "Move-out must be after move-in.",
+    "checkinTooSoon": "Move-in must be from tomorrow.",
+    "checkinTooFar": "You can request up to 12 months ahead.",
+    "minStay": "Minimum stay is {nights} nights.",
+    "maxStay": "Maximum stay is 12 months.",
+    "datesTaken": "These dates are already booked. Please choose other dates."
+  },
+  "Listing": {
+    "roomsHere": "Rooms in this building",
+    "from": "From {amount} / month"
+  },
+  "ListingType": {
+    "sharehouse": "Share house",
+    "studio": "Studio",
+    "apartment": "Apartment"
+  },
+  "RoomType": {
+    "private": "Private room",
+    "shared": "Shared room",
+    "entire": "Entire place"
+  },
+  "Amenity": {
+    "wifi": "Wi-Fi",
+    "washer": "Washing machine",
+    "kitchen": "Shared kitchen",
+    "rooftop": "Rooftop",
+    "airConditioning": "Air conditioning",
+    "workspace": "Workspace",
+    "cleaning": "Weekly cleaning",
+    "studyLounge": "Study lounge",
+    "courtyard": "Courtyard",
+    "floorHeating": "Ondol floor heating",
+    "elevator": "Elevator",
+    "gym": "Gym",
+    "security": "24h security",
+    "parking": "Parking"
+  },
+  "Feature": {
+    "desk": "Desk",
+    "wardrobe": "Wardrobe",
+    "window": "Large window",
+    "privateBathroom": "Private bathroom",
+    "doubleBed": "Double bed",
+    "locker": "Personal locker",
+    "readingLight": "Reading light",
+    "kitchenette": "Kitchenette",
+    "parkView": "Park view",
+    "balcony": "Balcony",
+    "courtyardView": "Courtyard view",
+    "floorBed": "Traditional floor bed",
+    "floorHeating": "Ondol floor heating",
+    "fullKitchen": "Full kitchen",
+    "cityView": "City view"
+  },
+  "NotFound": {
+    "title": "We couldn't find that page",
+    "body": "The room may have been removed, or the link might be wrong.",
+    "cta": "Browse rooms"
+  },
+  "Error": {
+    "title": "Something went wrong",
+    "body": "Please try again in a moment.",
+    "retry": "Try again"
+  }
+}

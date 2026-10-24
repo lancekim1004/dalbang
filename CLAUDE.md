@@ -3,6 +3,7 @@
 > 프로젝트: **Dalbang(달방)** — 서울에 한 달 이상 머무는 외국인을 위한 방 단위 숙소 예약 요청 사이트
 
 ## 0. 가장 먼저 할 일
+0. 코드를 쓰기 전 `AGENTS.md`를 읽을 것 — Next.js 16은 예전과 달라서 `node_modules/next/dist/docs/` 공식 문서를 먼저 확인한다.
 1. 작업 전 **`docs/PLAN.md`와 `docs/PROGRESS.md`를 먼저 읽을 것.**
 2. PROGRESS.md의 "현재 위치"를 확인하고, 이번에 할 작업이 몇 단계 몇 번인지 사용자에게 한 줄로 말한 뒤 시작할 것.
 3. 작업이 끝나면 PROGRESS.md의 표와 작업 일지를 갱신할 것.
@@ -27,6 +28,8 @@
 - 새 패키지는 꼭 필요할 때만, 널리 쓰이고 관리되는 것만 설치한다.
 
 ### 구조와 스타일
+- 화면은 데이터를 `src/lib/repo.ts`를 통해서만 가져온다 (DB 교체 시 이 파일만 수정).
+- 자주 쓰는 명령: `npm run dev`(미리보기), `npm test`(자동 시험), `npm run typecheck`, `npm run lint`, `npm run build`.
 - 휴대폰 화면(375px)을 먼저 만들고 넓은 화면으로 확장한다.
 - 파일 하나는 한 가지 역할만. 너무 길어지면(약 200줄 이상) 나눈다.
 - 이름은 영어로, 뜻이 분명하게 (`calcTotalPrice`, `RoomCard`).
