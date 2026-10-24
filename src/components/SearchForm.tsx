@@ -2,7 +2,7 @@ import Form from "next/form";
 import { useTranslations } from "next-intl";
 import { Search } from "lucide-react";
 import { formatKRW } from "@/lib/format";
-import { STAY_MONTH_OPTIONS } from "@/lib/repo";
+import { STAY_MONTH_OPTIONS } from "@/lib/search-params";
 import type { District } from "@/lib/types";
 
 export const BUDGET_OPTIONS = [600_000, 800_000, 1_000_000, 1_500_000, 2_000_000];

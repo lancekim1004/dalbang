@@ -1,8 +1,17 @@
 // 주소창의 검색 조건(?district=mapo&moveIn=...)을 안전하게 읽는다. 이상한 값은 무시.
 import { z } from "zod";
 import { isValidIsoDate } from "./dates";
-import type { RoomFilters } from "./repo";
-import { STAY_MONTH_OPTIONS } from "./repo";
+
+export interface RoomFilters {
+  district?: string; // 지역 slug
+  minPrice?: number;
+  maxPrice?: number;
+  moveIn?: string; // YYYY-MM-DD
+  months?: number; // 머물 개월 수 (입주일과 함께 빈 방 확인에 사용)
+  sort?: "recommended" | "priceAsc" | "priceDesc";
+}
+
+export const STAY_MONTH_OPTIONS = [1, 2, 3, 6, 12] as const;
 
 const one = (v: unknown) => (Array.isArray(v) ? v[0] : v);
 const optionalNumber = z.preprocess(

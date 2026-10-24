@@ -2,7 +2,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { getTranslations } from "next-intl/server";
 import { ArrowRight, CalendarCheck, Mail, Search } from "lucide-react";
-import { HERO_PHOTO } from "@/data/sample";
 import { RoomCard } from "@/components/RoomCard";
 import { SearchForm } from "@/components/SearchForm";
 import { addDaysIso, addMonthsIso, todayInSeoul } from "@/lib/dates";
@@ -11,6 +10,9 @@ import { MAX_MONTHS_AHEAD } from "@/lib/stay-rules";
 
 // 예약 가능 여부가 날짜에 따라 바뀌므로 1시간마다 새로 만든다
 export const revalidate = 3600;
+
+// 홈 화면 큰 사진 (남산타워 야경, Unsplash 무료 사진)
+const HERO_PHOTO = "https://images.unsplash.com/photo-1546874177-9e664107314e?auto=format&fit=crop&w=1200&q=75";
 
 export default async function HomePage() {
   const t = await getTranslations("Home");

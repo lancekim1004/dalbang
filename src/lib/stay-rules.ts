@@ -1,10 +1,15 @@
 // 예약 요청 가능 조건 (PLAN.md 4-2). 화면 미리보기와 서버 검사에서 같이 쓴다.
 import { addDaysIso, addMonthsIso, isValidIsoDate, nightsBetween, rangesOverlap, todayInSeoul } from "./dates";
-import type { BookedRange } from "./types";
+import type { BookedRange, BookingStatus } from "./types";
 
 export const MIN_NIGHTS = 30;
 export const MAX_NIGHTS = 365;
 export const MAX_MONTHS_AHEAD = 12;
+
+/** 날짜를 차지하는 확정 예약인지 (DB 겹침 금지 규칙과 같은 기준) */
+export function isConfirmed(status: BookingStatus): boolean {
+  return status === "approved" || status === "awaiting_payment" || status === "paid";
+}
 
 export type StayError =
   | "invalidDate"
@@ -38,9 +43,9 @@ export function checkStay(input: StayCheck): StayError | null {
   if (nights < minNights) return "minStay";
   if (nights > MAX_NIGHTS) return "maxStay";
 
-  // 승인된 예약과 겹치면 불가 (대기 요청끼리는 겹쳐도 됨)
+  // 확정된 예약과 겹치면 불가 (대기 요청끼리는 겹쳐도 됨)
   const taken = input.booked.some(
-    (b) => b.status === "approved" && rangesOverlap(checkIn, checkOut, b.checkIn, b.checkOut),
+    (b) => isConfirmed(b.status) && rangesOverlap(checkIn, checkOut, b.checkIn, b.checkOut),
   );
   if (taken) return "datesTaken";
   return null;

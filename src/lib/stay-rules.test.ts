@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { checkStay } from "./stay-rules";
+import { checkStay, isConfirmed } from "./stay-rules";
 import type { BookedRange } from "./types";
 
 const today = "2027-01-10";
@@ -49,5 +49,20 @@ describe("checkStay — 예약 요청 가능 조건", () => {
   });
   it("대기(pending) 요청과는 겹쳐도 가능", () => {
     expect(checkStay({ ...base, booked, checkIn: "2027-06-10", checkOut: "2027-07-20" })).toBeNull();
+  });
+});
+
+describe("isConfirmed — 날짜를 차지하는 예약 상태 (DB 겹침 금지 규칙과 같은 기준)", () => {
+  it("승인·결제 대기·결제 완료는 확정", () => {
+    expect(["approved", "awaiting_payment", "paid"].every((s) => isConfirmed(s as BookedRange["status"]))).toBe(true);
+  });
+  it("대기·거절·취소·만료는 확정 아님", () => {
+    expect(["pending", "rejected", "cancelled", "expired"].some((s) => isConfirmed(s as BookedRange["status"]))).toBe(false);
+  });
+  it("결제 완료 예약과 겹치는 날짜는 거부, 거절된 예약과는 허용", () => {
+    const range = { roomId: "r1", checkIn: "2027-02-10", checkOut: "2027-03-20" };
+    const stay = { ...base, checkIn: "2027-02-01", checkOut: "2027-03-03" };
+    expect(checkStay({ ...stay, booked: [{ ...range, status: "paid" }] })).toBe("datesTaken");
+    expect(checkStay({ ...stay, booked: [{ ...range, status: "rejected" }] })).toBeNull();
   });
 });

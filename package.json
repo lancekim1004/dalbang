@@ -8,9 +8,12 @@
     "start": "next start",
     "lint": "eslint",
     "typecheck": "tsc --noEmit",
-    "test": "vitest run"
+    "test": "vitest run",
+    "db:push": "node scripts/supabase-db.mjs db push",
+    "db:types": "node scripts/supabase-db.mjs gen types typescript --schema public > src/lib/supabase/database.types.ts"
   },
   "dependencies": {
+    "@supabase/supabase-js": "^2.118.0",
     "date-fns": "^4.4.0",
     "leaflet": "^1.9.4",
     "lucide-react": "^1.61.0",
@@ -19,6 +22,7 @@
     "react": "19.3.0",
     "react-dom": "19.3.0",
     "react-leaflet": "^5.0.0",
+    "server-only": "^0.0.1",
     "zod": "^4.6.7"
   },
   "devDependencies": {
@@ -29,6 +33,7 @@
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "16.4.3",
+    "supabase": "^2.122.0",
     "tailwindcss": "^4",
     "typescript": "^5",
     "vitest": "^5.0.5"

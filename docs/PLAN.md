@@ -470,3 +470,4 @@ pending ──승인──▶ approved ──관리자 취소──▶ cancelled
 | 2026-10-24 | 예시 자료 숙소 8·방 20으로 확대, Next.js 16 새 캐시 기능은 끄고 사용 |
 | 2026-10-24 | 서비스 이름 Dalbang(달방) 확정, 예약 번호 앞글자 `DB-` |
 | 2026-10-24 | 0원 방향 확정: 도메인 미구매, 메일 Resend→Gmail SMTP, 자동 만료 3일, 데모 안내 띠·일시정지 방지 추가 |
+| 2026-10-24 | DB 적용: 모든 id는 UUID. `photos.storage_path`는 예시 자료용 외부 사진 주소(https://)도 허용. 달력용 `get_booked_ranges` 함수 추가(손님 정보 없이 방·날짜·상태만 공개). 겹침 금지는 approved·awaiting_payment·paid 모두에 적용. 표 권한(GRANT) 명시 |

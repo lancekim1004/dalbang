@@ -1,6 +1,7 @@
 import { useTranslations } from "next-intl";
 import { addMonths, endOfMonth, format, getDay, startOfMonth } from "date-fns";
 import { parseDate, toIso, rangesOverlap, addDaysIso } from "@/lib/dates";
+import { isConfirmed } from "@/lib/stay-rules";
 import type { BookedRange } from "@/lib/types";
 
 const WEEK = ["S", "M", "T", "W", "T", "F", "S"];
@@ -8,7 +9,7 @@ const WEEK = ["S", "M", "T", "W", "T", "F", "S"];
 /** 앞으로 3개월 달력. 승인된 예약 날짜는 칠해서 표시 */
 export function AvailabilityCalendar({ booked, today, months = 3 }: { booked: BookedRange[]; today: string; months?: number }) {
   const t = useTranslations("Room");
-  const approved = booked.filter((b) => b.status === "approved");
+  const approved = booked.filter((b) => isConfirmed(b.status));
   const isBooked = (iso: string) => approved.some((b) => rangesOverlap(iso, addDaysIso(iso, 1), b.checkIn, b.checkOut));
   const first = startOfMonth(parseDate(today));
 
