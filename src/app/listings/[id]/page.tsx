@@ -9,6 +9,7 @@ import { MapView } from "@/components/map/MapView";
 import { roomsToPins } from "@/components/map/pins";
 import { formatKRW } from "@/lib/format";
 import { getListing } from "@/lib/repo";
+import { siteUrl } from "@/lib/site";
 
 export const revalidate = 3600;
 
@@ -31,9 +32,23 @@ export default async function ListingPage({ params }: PageProps<"/listings/[id]"
   const { listing, district, rooms } = data;
   const t = await getTranslations();
   const minPrice = Math.min(...rooms.map((r) => r.monthlyPrice));
+  // 검색 엔진이 숙소 정보를 이해하도록 붙이는 구조화 데이터 (schema.org)
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Accommodation",
+    name: listing.title,
+    description: listing.description,
+    url: `${siteUrl()}/listings/${listing.id}`,
+    image: listing.photos.map((p) => p.url),
+    address: { "@type": "PostalAddress", streetAddress: listing.addressEn, addressLocality: "Seoul", addressCountry: "KR" },
+    geo: { "@type": "GeoCoordinates", latitude: listing.lat, longitude: listing.lng },
+    amenityFeature: listing.amenities.map((a) => ({ "@type": "LocationFeatureSpecification", name: t(`Amenity.${a}`), value: true })),
+  };
 
   return (
     <div className="mx-auto max-w-6xl px-4 py-6">
+      {/* "<" 글자를 바꿔서 스크립트 끼워 넣기를 막음 */}
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c") }} />
       <PhotoGallery photos={listing.photos} />
       <header className="mt-6">
         <p className="text-sm text-muted">{district.nameEn} · {t(`ListingType.${listing.type}`)}</p>

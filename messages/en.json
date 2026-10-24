@@ -174,7 +174,8 @@
   "Error": {
     "title": "Something went wrong",
     "body": "Please try again in a moment.",
-    "retry": "Try again"
+    "retry": "Try again",
+    "home": "Go to home page"
   },
   "Request": {
     "metaTitle": "Request {room}",

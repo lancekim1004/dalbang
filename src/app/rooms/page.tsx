@@ -30,10 +30,11 @@ export default async function RoomsPage({ searchParams }: PageProps<"/rooms">) {
   const list = (
     <div>
       <div className="mb-4 flex flex-wrap items-center justify-between gap-2">
-        <p className="text-sm text-muted">
+        {/* 제목 단계(h1→h2→h3)를 맞춰 화면낭독기가 구조를 이해하도록 */}
+        <h2 className="text-sm font-normal text-muted">
           {t("count", { count: rooms.length })}
           {filters.moveIn && rooms.length > 0 && ` · ${t("availableFrom", { date: formatDate(filters.moveIn) })}`}
-        </p>
+        </h2>
         <SortSelect />
       </div>
       {rooms.length === 0 ? (

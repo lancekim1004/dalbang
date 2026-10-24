@@ -3,6 +3,7 @@ import "server-only";
 import { createTranslator } from "next-intl";
 import messages from "../../../messages/en.json";
 import { formatDate, formatKRW } from "../format";
+import { siteUrl } from "../site";
 import type { EmailType } from "./types";
 
 export interface MailBooking {
@@ -22,7 +23,6 @@ export interface MailBooking {
   id: string;
 }
 
-export const siteUrl = () => (process.env.NEXT_PUBLIC_SITE_URL ?? "https://dalbang.vercel.app").replace(/\/$/, "");
 
 const escape = (s: string) => s.replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]!);
 
